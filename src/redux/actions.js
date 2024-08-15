@@ -3,7 +3,6 @@ import axios from "axios";
 
 const BASE_URL = "https://cave-drone-server.shtoa.xyz";
 
-// Асинхронна дія для ініціалізації гри
 export const initGame = createAsyncThunk(
   "game/initGame",
   async ({ name, complexity }, { rejectWithValue }) => {
@@ -12,14 +11,13 @@ export const initGame = createAsyncThunk(
         name,
         complexity,
       });
-      return response.data.id; // Повертаємо лише id гравця
+      return response.data.id;
     } catch (err) {
       return rejectWithValue(err.response.data);
     }
   }
 );
 
-// Асинхронна дія для отримання частин токена
 export const fetchToken = createAsyncThunk(
   "game/fetchToken",
   async (playerId, { rejectWithValue }) => {
@@ -31,7 +29,6 @@ export const fetchToken = createAsyncThunk(
         axios.get(`${BASE_URL}/token/4`, { params: { id: playerId } }),
       ]);
 
-      // Об'єднуємо частини токена в один рядок
       const token = tokenParts.map((response) => response.data.chunk).join("");
       return token;
     } catch (err) {

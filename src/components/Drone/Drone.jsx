@@ -1,13 +1,30 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-const Drone = ({ position }) => {
+const Drone = () => {
+  const dronePosition = useSelector((state) => state.game.dronePosition);
+  const triangleSize = 20;
+
   return (
-    <polygon
-      points={`${position.x},${position.y} ${position.x - 5},${
-        position.y + 10
-      } ${position.x + 5},${position.y + 10}`}
-      fill="green"
-    />
+    <svg
+      width="100%"
+      height="100%"
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        pointerEvents: "none",
+      }}
+    >
+      <polygon
+        points={`${dronePosition.x},${dronePosition.y} ${
+          dronePosition.x - triangleSize / 2
+        },${dronePosition.y - triangleSize} ${
+          dronePosition.x + triangleSize / 2
+        },${dronePosition.y - triangleSize}`}
+        fill="green"
+      />
+    </svg>
   );
 };
 

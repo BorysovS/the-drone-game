@@ -19,3 +19,12 @@ svg {
   width: 500px !important;
 overflow: visible;
 }
+
+.game-container {
+  position: relative;
+  width: 500px;
+  /* Ширина печери */
+  height: 500px;
+  /* Висота печери */
+  overflow: hidden;
+}
