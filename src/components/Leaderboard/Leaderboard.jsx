@@ -1,4 +1,3 @@
-// src/components/Leaderboard.js
 import React from "react";
 
 const Leaderboard = () => {

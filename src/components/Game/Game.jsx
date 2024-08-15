@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initGame, fetchToken } from "../../redux/actions";
 import { setCaveData, updateCaveOffset } from "../../redux/gameSlice";
@@ -7,12 +7,22 @@ import Controls from "../../utils/Controls";
 import CollisionDetector from "../../utils/CollisionDetector";
 import Drone from "../Drone/Drone";
 import Scoreboard from "../ScoreBoard/ScoreBoard";
+import { Loader } from "../Loader/Loader";
 
 const Game = () => {
   const dispatch = useDispatch();
   const { playerId, token, status, name, complexity, caveSpeed } = useSelector(
     (state) => state.game
   );
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     dispatch(initGame({ name, complexity }));
@@ -58,13 +68,16 @@ const Game = () => {
   }, [dispatch, caveSpeed]);
 
   return (
-    <div className="game-container" style={{ width: 800 }}>
-      <Cave />
-      <Controls />
-      <CollisionDetector />
-      <Drone />
-      <Scoreboard />
-    </div>
+    <>
+      {loading && <Loader />}
+      <div className="game-container" style={{ width: 800 }}>
+        <Cave />
+        <Controls />
+        <CollisionDetector />
+        <Drone />
+        <Scoreboard />
+      </div>
+    </>
   );
 };
 

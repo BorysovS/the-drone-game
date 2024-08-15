@@ -1,14 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { calculateScoreIncrement } from "../../utils/calculateScore";
 
 const Scoreboard = () => {
   const { dronePosition, caveOffset, complexity, caveSpeed } = useSelector(
     (state) => state.game
   );
-
-  function calculateScoreIncrement(caveSpeed, caveOffset, complexity) {
-    return caveSpeed * (caveOffset + complexity);
-  }
 
   let scoreMultiplier = calculateScoreIncrement(
     caveSpeed,
