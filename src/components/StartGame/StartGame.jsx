@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { loadLeaderboard, setComplexity, setName } from "../../redux/gameSlice";
-import { initGame } from "../../redux/actions";
 
 const StartPage = ({ onStartGame }) => {
   const { register, handleSubmit } = useForm();
